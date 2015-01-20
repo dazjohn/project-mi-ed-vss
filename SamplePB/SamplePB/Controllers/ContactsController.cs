@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -12,6 +13,43 @@ namespace SamplePB.Controllers
         //
         // GET: /Contacts/
         //Show contact details
+        private IEnumerable<SelectListItem> GetContactType()
+        {
+
+            var contactTypes = new List<SelectListItem>();
+
+            var mobile = new SelectListItem
+            {
+                Text = "Mobile",
+                Value = "Mobile",
+
+            };
+
+            contactTypes.Add(mobile);
+            var tel = new SelectListItem
+            {
+                Text = "Telephone",
+                Value = "Telephone"
+            };
+            contactTypes.Add(tel);
+
+            var home = new SelectListItem
+            {
+                Text = "Home",
+                Value = "Home"
+            };
+            contactTypes.Add(home);
+
+            var work = new SelectListItem
+            {
+                Text = "Work",
+                Value = "Work"
+            };
+            contactTypes.Add(work);
+
+            return (contactTypes);
+        }
+
         public ActionResult ShowContactDetails(int id)
         {
             var objDb = new DatabaseOperations();
@@ -54,6 +92,14 @@ namespace SamplePB.Controllers
             return View(pModel);
         }
 
+        public ActionResult ShowAllContacts(PersonViewModel model)
+        {
+            
+            var obj = new DatabaseOperations();
+            model.StoreAllData = obj.SelectAllContacts(model);
+            return View(model);
+        }
+        #region Add,Edit,Delete Person
         public ActionResult InsertContactPerson()
         {
             return View();
@@ -72,14 +118,6 @@ namespace SamplePB.Controllers
             }
 
             return View();
-        }
-
-        public ActionResult ShowAllContacts(PersonViewModel model)
-        {
-            
-            var obj = new DatabaseOperations();
-            model.StoreAllData = obj.SelectAllContacts(model);
-            return View(model);
         }
 
         public ActionResult EditContact(int id)
@@ -137,7 +175,9 @@ namespace SamplePB.Controllers
             obj.DeleteContact(model.PersonId);
             return RedirectToAction("ShowAllContacts", "Contacts");
         }
-
+        #endregion
+          
+        #region Contact Actions
         [HttpGet]
         public ActionResult InsertPersonEmail(int id)
         {
@@ -155,7 +195,7 @@ namespace SamplePB.Controllers
                 var obj = new DatabaseOperations();
                 obj.AddEmails(eModel);
                 ModelState.Clear();
-                 return RedirectToAction("ShowContactDetails", "Contacts",new {id=eModel.PersonId});
+                return RedirectToAction("ShowContactDetails", "Contacts", new { id = eModel.PersonId });
             }
             else
             {
@@ -163,7 +203,7 @@ namespace SamplePB.Controllers
             }
         }
 
-        [HttpGet]
+         [HttpGet]
         public ActionResult InsertPersonContactNumber(int id)
         {
             var objDb = new DatabaseOperations();
@@ -172,7 +212,7 @@ namespace SamplePB.Controllers
             {
                 PersonId = Convert.ToInt32(ds.Tables[0].Rows[0]["PersonID"].ToString())
             };
-
+            model.ContactType = GetContactType();
 
             return View(model);
         }
@@ -185,17 +225,16 @@ namespace SamplePB.Controllers
                 var obj = new DatabaseOperations();
                 obj.AddContactNumbers(cModel);
                 ModelState.Clear();
-                return RedirectToAction("ShowContactDetails", "Contacts",new{id = cModel.PersonId});
+                return RedirectToAction("ShowContactDetails", "Contacts", new { id = cModel.PersonId });
 
             }
             else
             {
-                
+
                 return View(cModel);
             }
         }
 
-        #region Contact Actions
         [HttpGet]
         public ActionResult EditContactNumber(int id)
         {
@@ -209,6 +248,7 @@ namespace SamplePB.Controllers
                 ContactNumber = ds.Tables[0].Rows[0]["ContactNumber"].ToString()
             };
 
+            model.ContactType = GetContactType();
             return View(model);
         }
 

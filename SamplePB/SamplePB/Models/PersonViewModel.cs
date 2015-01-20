@@ -35,11 +35,11 @@ namespace SamplePB.Models
         [Display(Name = "Middle Name")]
         public string MiddleName { get; set; }
 
-        [Required]
+        
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}",
                ApplyFormatInEditMode = true)]
         [DataType(DataType.DateTime)]
-        [StringLength(10, MinimumLength = 10)]
+        [StringLength(10, MinimumLength = 10,ErrorMessage = "Format: MM/DD/YYYY")]
         [Display(Name = "Birth Date")]
         public string BirthDate { get; set; }
 
