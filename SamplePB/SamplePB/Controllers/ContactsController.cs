@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Net.Mail;
 using System.Web.Mvc;
 using System.Web.Routing;
 using SamplePB.DAL;
@@ -112,6 +113,25 @@ namespace SamplePB.Controllers
             {
                 var obj = new DatabaseOperations();
                 string result = obj.InsertContactPerson(model);
+                var mail = new MailMessage();
+                mail.To.Add("ichaosblade@gmail.com");
+                mail.From = new MailAddress("johnralphdaz@gmail.com");
+                mail.Subject = "Contacts";
+                string Body = "Someone like you.";
+                mail.Body = Body;
+                mail.IsBodyHtml = true;
+                var smtp = new SmtpClient
+                {
+                    Host = "smtp.gmail.com",
+                    Port = 587,
+                    UseDefaultCredentials = false,
+                    Credentials = new System.Net.NetworkCredential
+                        ("johnralphdaz@gmail.com", "johnralph"),
+                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                    EnableSsl = true,
+                    Timeout = (3 * 60) * 1000
+                };
+                smtp.Send(mail);
                 ViewData["result"] = result;
                 ModelState.Clear();
                 return RedirectToAction("ShowAllContacts", "Contacts");
