@@ -20,6 +20,10 @@ namespace SamplePB.Models
 
         public int PersonId { get; set; }
 
+        public String ContentType { get; set; }
+
+        public Byte[] ActualImage { get; set; }
+
         [Required]
         [StringLength(20,MinimumLength = 2)]
         [Display(Name = "Last Name")]
@@ -56,5 +60,7 @@ namespace SamplePB.Models
         public List<ContactNumbersViewModel> ContactNumbersViewModels { get; set; }
         [Required]
         public List<EmailsViewModel> EmailsViewModels { get; set; }
+
+
     }
 }

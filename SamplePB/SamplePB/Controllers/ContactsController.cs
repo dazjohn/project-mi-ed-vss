@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Net.Mail;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using SamplePB.DAL;
@@ -56,17 +57,18 @@ namespace SamplePB.Controllers
             var objDb = new DatabaseOperations();
 
             var ds = objDb.SelectById(id);
-            var pModel = new PersonViewModel
-            {
-                PersonId = id,
-                LastName = ds.Tables[0].Rows[0]["LastName"].ToString(),
-                FirstName = ds.Tables[0].Rows[0]["FirstName"].ToString(),
-                MiddleName = ds.Tables[0].Rows[0]["MiddleName"].ToString(),
-                BirthDate = ds.Tables[0].Rows[0]["BirthDate"].ToString(),
-                HomeAddress = ds.Tables[0].Rows[0]["HomeAddress"].ToString(),
-                Company = ds.Tables[0].Rows[0]["Company"].ToString()
+            var pModel = new PersonViewModel();
 
-            };
+            pModel.PersonId = id;
+            pModel.LastName = ds.Tables[0].Rows[0]["LastName"].ToString();
+            pModel.FirstName = ds.Tables[0].Rows[0]["FirstName"].ToString();
+            pModel.MiddleName = ds.Tables[0].Rows[0]["MiddleName"].ToString();
+            pModel.BirthDate = ds.Tables[0].Rows[0]["BirthDate"].ToString();
+            pModel.HomeAddress = ds.Tables[0].Rows[0]["HomeAddress"].ToString();
+            pModel.Company = ds.Tables[0].Rows[0]["Company"].ToString();
+            pModel.ActualImage = (byte[]) ds.Tables[0].Rows[0]["ProfilePic"];
+            pModel.ContentType = ds.Tables[0].Rows[0]["ContentType"].ToString();
+            
 
             foreach (DataRow row in ds.Tables[1].Rows)
             {
@@ -89,7 +91,7 @@ namespace SamplePB.Controllers
                         Emails = row["EmailAddress"].ToString()
                     });
             }
-        
+
             return View(pModel);
         }
 
@@ -106,18 +108,34 @@ namespace SamplePB.Controllers
             return View();
         }
 
-        [HttpPost]
+        [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult InsertContactPerson(PersonViewModel model)
         {
-            if (ModelState.IsValid)
-            {
+            if (ModelState.IsValid){
+
+
+                
+                HttpPostedFileBase file = Request.Files["OriginalLocation"];
+                
+                model.ContentType = file.ContentType;
+
+                Int32 length = file.ContentLength;
+
+                byte[] tempImage = new byte[length];
+                file.InputStream.Read(tempImage, 0, length);
+                model.ActualImage = tempImage;
+
                 var obj = new DatabaseOperations();
-                string result = obj.InsertContactPerson(model);
+                obj.InsertContactPerson(model);
+                
+
+
+
                 var mail = new MailMessage();
                 mail.To.Add("ichaosblade@gmail.com");
                 mail.From = new MailAddress("johnralphdaz@gmail.com");
                 mail.Subject = "Contacts";
-                string Body = "Someone like you.";
+                string Body = model.LastName + ", " + model.FirstName + " " + model.MiddleName + " has been added as contact.";
                 mail.Body = Body;
                 mail.IsBodyHtml = true;
                 var smtp = new SmtpClient
@@ -132,7 +150,7 @@ namespace SamplePB.Controllers
                     Timeout = (3 * 60) * 1000
                 };
                 smtp.Send(mail);
-                ViewData["result"] = result;
+             
                 ModelState.Clear();
                 return RedirectToAction("ShowAllContacts", "Contacts");
             }
@@ -140,6 +158,8 @@ namespace SamplePB.Controllers
             return View();
         }
 
+
+        
         public ActionResult EditContact(int id)
         {
             var objDb = new DatabaseOperations();
@@ -364,5 +384,27 @@ namespace SamplePB.Controllers
             return RedirectToAction("ShowContactDetails", "Contacts", new { id = model.PersonId });
         } 
         #endregion
+
+
+        [HttpGet]
+        public ActionResult ChangeProfilePicture(int id, PersonViewModel model)
+        {
+            model.PersonId = id;
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult ChangeProfilePicture(PersonViewModel model)
+        {
+            HttpPostedFileBase file = Request.Files["OriginalLocation"];
+            model.ContentType = file.ContentType;
+            Int32 length = file.ContentLength;
+            byte[] tempImage = new byte[length];
+            file.InputStream.Read(tempImage, 0, length);
+            model.ActualImage = tempImage;
+            var obj = new DatabaseOperations();
+            obj.ChangeProfilePicture(model);
+            return RedirectToAction("ShowContactDetails", "Contacts", new { id = model.PersonId });
+        }
     }
 }
