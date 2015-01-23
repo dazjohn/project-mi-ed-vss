@@ -154,6 +154,7 @@ C:\Users\win8\Desktop\github\SamplePB\SamplePB\bin\Antlr3.Runtime.pdb
 C:\Users\win8\Desktop\github\SamplePB\SamplePB\obj\Debug\SamplePB.csprojResolveAssemblyReference.cache
 C:\Users\win8\Desktop\github\SamplePB\SamplePB\obj\Debug\SamplePB.dll
 C:\Users\win8\Desktop\github\SamplePB\SamplePB\obj\Debug\SamplePB.pdb
+<<<<<<< HEAD
 C:\Users\Admin\Desktop\project-mi-ed-vss\SamplePB\SamplePB\bin\SamplePB.dll.config
 C:\Users\Admin\Desktop\project-mi-ed-vss\SamplePB\SamplePB\bin\SamplePB.dll
 C:\Users\Admin\Desktop\project-mi-ed-vss\SamplePB\SamplePB\bin\SamplePB.pdb
@@ -206,3 +207,31 @@ C:\Users\Admin\Desktop\backup with image upload\SamplePB\SamplePB\bin\Antlr3.Run
 C:\Users\Admin\Desktop\backup with image upload\SamplePB\SamplePB\obj\Debug\SamplePB.csprojResolveAssemblyReference.cache
 C:\Users\Admin\Desktop\backup with image upload\SamplePB\SamplePB\obj\Debug\SamplePB.dll
 C:\Users\Admin\Desktop\backup with image upload\SamplePB\SamplePB\obj\Debug\SamplePB.pdb
+=======
+C:\Users\GINNO\Desktop\gitpart2\SamplePB\SamplePB\bin\SamplePB.dll.config
+C:\Users\GINNO\Desktop\gitpart2\SamplePB\SamplePB\bin\SamplePB.dll
+C:\Users\GINNO\Desktop\gitpart2\SamplePB\SamplePB\bin\SamplePB.pdb
+C:\Users\GINNO\Desktop\gitpart2\SamplePB\SamplePB\bin\Antlr3.Runtime.dll
+C:\Users\GINNO\Desktop\gitpart2\SamplePB\SamplePB\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\GINNO\Desktop\gitpart2\SamplePB\SamplePB\bin\Newtonsoft.Json.dll
+C:\Users\GINNO\Desktop\gitpart2\SamplePB\SamplePB\bin\System.Web.Helpers.dll
+C:\Users\GINNO\Desktop\gitpart2\SamplePB\SamplePB\bin\System.Web.Mvc.dll
+C:\Users\GINNO\Desktop\gitpart2\SamplePB\SamplePB\bin\System.Web.Optimization.dll
+C:\Users\GINNO\Desktop\gitpart2\SamplePB\SamplePB\bin\System.Web.Razor.dll
+C:\Users\GINNO\Desktop\gitpart2\SamplePB\SamplePB\bin\System.Web.WebPages.Deployment.dll
+C:\Users\GINNO\Desktop\gitpart2\SamplePB\SamplePB\bin\System.Web.WebPages.dll
+C:\Users\GINNO\Desktop\gitpart2\SamplePB\SamplePB\bin\System.Web.WebPages.Razor.dll
+C:\Users\GINNO\Desktop\gitpart2\SamplePB\SamplePB\bin\WebGrease.dll
+C:\Users\GINNO\Desktop\gitpart2\SamplePB\SamplePB\bin\System.Web.Helpers.xml
+C:\Users\GINNO\Desktop\gitpart2\SamplePB\SamplePB\bin\System.Web.Mvc.xml
+C:\Users\GINNO\Desktop\gitpart2\SamplePB\SamplePB\bin\System.Web.Optimization.xml
+C:\Users\GINNO\Desktop\gitpart2\SamplePB\SamplePB\bin\System.Web.Razor.xml
+C:\Users\GINNO\Desktop\gitpart2\SamplePB\SamplePB\bin\System.Web.WebPages.xml
+C:\Users\GINNO\Desktop\gitpart2\SamplePB\SamplePB\bin\System.Web.WebPages.Deployment.xml
+C:\Users\GINNO\Desktop\gitpart2\SamplePB\SamplePB\bin\System.Web.WebPages.Razor.xml
+C:\Users\GINNO\Desktop\gitpart2\SamplePB\SamplePB\bin\Newtonsoft.Json.xml
+C:\Users\GINNO\Desktop\gitpart2\SamplePB\SamplePB\bin\Antlr3.Runtime.pdb
+C:\Users\GINNO\Desktop\gitpart2\SamplePB\SamplePB\obj\Debug\SamplePB.csprojResolveAssemblyReference.cache
+C:\Users\GINNO\Desktop\gitpart2\SamplePB\SamplePB\obj\Debug\SamplePB.dll
+C:\Users\GINNO\Desktop\gitpart2\SamplePB\SamplePB\obj\Debug\SamplePB.pdb
+>>>>>>> ed953f0b1da6af021ee69066d598275cdb3f7c23
